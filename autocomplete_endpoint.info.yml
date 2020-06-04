@@ -1,0 +1,6 @@
+name: 'Autocomplete Endpoint'
+description: "Provides generic HTTP endpoint for exposing autocomplete data."
+type: module
+core: 8.x
+dependencies:
+  - search_api

@@ -1,0 +1,3 @@
+services:
+  autocomplete_endpoint.datasource.sample:
+    class: Drupal\autocomplete_endpoint\Plugin\DataSource\Sample

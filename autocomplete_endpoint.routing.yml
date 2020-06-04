@@ -1,8 +1,8 @@
 autocomplete_endpoint.sample:
-  path: '/autocomplete_endpoint/{data_source_plugin}'
+  path: '/autocomplete_endpoint/{data_source_plugin_id}'
   defaults:
     _controller: '\Drupal\autocomplete_endpoint\Controller\AutocompleteController::main'
     _format: json
-    data_source_plugin: sample
+    data_source_plugin_id: sample
   requirements:
     _permission: 'access content'

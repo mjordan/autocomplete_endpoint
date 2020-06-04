@@ -12,27 +12,35 @@ use Symfony\Component\HttpFoundation\Request;
 class AutocompleteController extends ControllerBase {
 
   /**
-   * Handler for autocomplete request.
+   * Autocomplete request handler.
    *
    * @param string $data_source_plugin_id
    *   String identifying the data source plugin.
+   * @param \Symfony\Component\HttpFoundation\Request $request
+   *   The current request object containing the query string.
    *
-   * @return $response
+   * @return \Symfony\Component\HttpFoundation\JsonResponse
+   *   A JSON response containing the autocomplete suggestions.
    */
   public function main($data_source_plugin_id, Request $request) {
     $query = $request->query->get('q');
-    $current_path = \Drupal::service('path.current')->getPath();
-    $path_parts = explode('/', ltrim($current_path, '/'));
-    // devel_debug($path_parts);
 
     $results = [];
     if (!$query) {
       return new JsonResponse($results);
     }
 
-    $data_source = \Drupal::service('autocomplete_endpoint.datasource.sample');
-    $results = $data_source->getData($query);
+    $data_source_service_id = 'autocomplete_endpoint.datasource.' . $data_source_plugin_id;
+    if (!empty(\Drupal::hasService($data_source_service_id))) {
+      $data_source = \Drupal::service($data_source_service_id);
+    }
+    else {
+      $message = t('The requested data source, @ds, is not available.', ['@ds' => $data_source_plugin_id]);
+      \Drupal::logger('autocomplete_endpoint')->error($message);
+      return new JsonResponse([$message]);
+    }
 
+    $results = $data_source->getData($query);
     return new JsonResponse($results);
   }
 }

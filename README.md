@@ -2,13 +2,27 @@
 
 ## Introduction
 
-A Drupal 8 module that provides a generic HTTP endpoing for exposing data for consumption by Drupal autocomplete form elements. Intended to be used with [Linked Data Lookup Field](https://drupal.org/project/linked_data_field).
+A Drupal 8 module that provides a generic HTTP endpoing for exposing data for consumption by Drupal autocomplete form elements. Initially intended to be used with [Linked Data Lookup Field](https://drupal.org/project/linked_data_field).
 
-Currently under development. Don't install it yet.
+Currently still a proof of concept.
+
+## Use cases
+
+The Linked Data Lookup Field module "Provides an autocomplete field widget that pulls suggested matches and URLs from authoritative sources." In fields of this type, a subject heading, for example, is human readable, but it also contain the heading's Linked Data URI from an autoritative vocabulary such as the [Library of Congress Subject Headings](http://id.loc.gov/authorities/subjects.html). This means that the heading, and the node it applies to, is part of the Linked Open Data environment and can be used in any tools and services that rely on Linked Data URIs.
+
+The Autocomplete Endpoint module allows a Drupal instance to provide authoritative vocabularies to other Drupal instances (or other consumers of vocabularies). Two use cases where this appies are:
+
+* A university library runs three different [Islandora](https://islandora.ca) instances (an institutional repository, a research data repository, and a repository of digitized images/books/manuscripts), and has a local vocabulary of department names that applies to items in all three repositories.
+* A group of libraries running Islandora are collaborating on creating distributed collections on a specific theme, and they want subject specialists from their partner insitutions to assist with creating Islandora objects. With this module, they can all use the same set of locally managed name entities.
+* A group of allied community organizations all use Drupal as their CMS, and each runs local training events. Using this module, all members of this group can use the same set of keywords to describe their events, enabling querying/grouping of those events across all members.
+
+In each case, one of the Drupal instances (the one running this module) maintains the shared vocabulary on behalf of the others, but they all use the shared vocabulary locally.
+
+Vocabularies exposed in this way are not limited to use by other Drupal instances. The data that this module exposes is consistent with the data exposed by the Library of Congress and other providers of Linked Data.
 
 ## Requirements
 
-* Drupal 8
+* There are no hard requirements for installing this module other than Drupal 8, but data it exposes was initially intended to be consumed by [Linked Data Lookup Field](https://drupal.org/project/linked_data_field).
 
 ## Installation
 
@@ -17,7 +31,7 @@ Currently under development. Don't install it yet.
 
 ## Configuration
 
-TDB
+Currently, this module requires no configuration. Configuration of Linked Data Lookup Field (and other consumers) to use this module will be provided soon.
 
 ## Current maintainer
 

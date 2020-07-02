@@ -23,24 +23,24 @@ class AutocompleteController extends ControllerBase {
    *   A JSON response containing the autocomplete suggestions.
    */
   public function main($data_source_plugin_id, Request $request) {
-    $query = $request->query->get('q');
-
-    $results = [];
-    if (!$query) {
-      return new JsonResponse($results);
-    }
+    $query_string = $request->getQueryString();
 
     $data_source_service_id = 'autocomplete_endpoint.datasource.' . $data_source_plugin_id;
-    if (!empty(\Drupal::hasService($data_source_service_id))) {
-      $data_source = \Drupal::service($data_source_service_id);
-    }
-    else {
+    if (empty(\Drupal::hasService($data_source_service_id))) {
       $message = t('The requested data source, @ds, is not available.', ['@ds' => $data_source_plugin_id]);
       \Drupal::logger('autocomplete_endpoint')->error($message);
       return new JsonResponse([$message]);
     }
 
-    $results = $data_source->getData($query);
+    $data_source = \Drupal::service($data_source_service_id);
+
+    $results = [];
+    // Autocomplete queries need some variable input.
+    if (!$query_string) {
+      return new JsonResponse($results);
+    }
+
+    $results = $data_source->getData($query_string);
     return new JsonResponse($results);
   }
 }

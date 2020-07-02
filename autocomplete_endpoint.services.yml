@@ -1,3 +1,5 @@
 services:
   autocomplete_endpoint.datasource.sample:
     class: Drupal\autocomplete_endpoint\Plugin\DataSource\Sample
+  autocomplete_endpoint.datasource.vocabulary:
+    class: Drupal\autocomplete_endpoint\Plugin\DataSource\Vocabulary

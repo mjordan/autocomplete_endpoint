@@ -10,7 +10,7 @@ Currently still a proof of concept.
 
 The Linked Data Lookup Field module "Provides an autocomplete field widget that pulls suggested matches and URLs from authoritative sources." In fields of this type, a subject heading, for example, is human readable, but it also contain the heading's Linked Data URI from an autoritative vocabulary such as the [Library of Congress Subject Headings](http://id.loc.gov/authorities/subjects.html). This means that the heading, and the node it applies to, is part of the Linked Open Data environment and can be used in any tools and services that rely on Linked Data URIs.
 
-The Autocomplete Endpoint module allows a Drupal instance to provide authoritative vocabularies to other Drupal instances (or other consumers of vocabularies). Two use cases where this appies are:
+The Autocomplete Endpoint module allows a Drupal instance to provide authoritative vocabularies to other Drupal instances (or other consumers of vocabularies). Some use cases for this ability are:
 
 * A university library runs three different [Islandora](https://islandora.ca) instances (an institutional repository, a research data repository, and a repository of digitized images/books/manuscripts), and has a local vocabulary of department names that applies to items in all three repositories.
 * A group of libraries running Islandora are collaborating on creating distributed collections on a specific theme, and they want subject specialists from their partner insitutions to assist with creating Islandora objects. With this module, they can all use the same set of locally managed name entities.

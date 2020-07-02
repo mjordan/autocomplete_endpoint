@@ -2,7 +2,7 @@
 
 ## Introduction
 
-A Drupal 8 module that provides a generic HTTP endpoing for exposing data for consumption by Drupal autocomplete form elements. Initially intended to be used with [Linked Data Lookup Field](https://drupal.org/project/linked_data_field).
+A Drupal 8/9 module that provides a generic HTTP endpoing for exposing data for consumption by Drupal autocomplete form elements. Initially intended to be used with [Linked Data Lookup Field](https://drupal.org/project/linked_data_field).
 
 Currently still a proof of concept.
 
@@ -23,6 +23,8 @@ Vocabularies exposed in this way are not limited to use by other Drupal instance
 ## Requirements
 
 * There are no hard requirements for installing this module other than Drupal 8, but data it exposes was initially intended to be consumed by [Linked Data Lookup Field](https://drupal.org/project/linked_data_field).
+
+This module is Drupal 9 ready.
 
 ## Installation
 

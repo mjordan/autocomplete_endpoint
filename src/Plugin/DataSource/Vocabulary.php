@@ -15,27 +15,34 @@ class Vocabulary implements AutocompleteEndpointDataSourceInterface {
     if (!array_key_exists('vid', $query_array)) {
       return ['The Vocabulary data source requires a vid= query parameter.']; 
     }
+    // This is a comma-delimited list of field names where URIs are stored
+    // for the vocabulary identified in vid=.
+    if (!array_key_exists('uri_fields', $query_array)) {
+      return ['uri_fields= query parameter is required.']; 
+    }
     if (!array_key_exists('q', $query_array)) {
       return ['The Vocabulary data source requires a q= query parameter.']; 
     }
 
-    // @todo: Get all terms in a vocab, plus their URIs. Only returen terms if they have a URI.
-    
-    $data = [
-      ['label' => 'one', 'uri' => 'http://example.com/one'],
-      ['label' => 'two', 'uri' => 'http://example.com/two'],
-      ['label' => 'three', 'uri' => 'http://example.com/three'],
-      ['label' => 'four', 'uri' => 'http://example.com/four'],
-      ['label' => 'five', 'uri' => 'http://example.com/five'],
-      ['label' => 'fifteen', 'uri' => 'http://example.com/fifteen'],
-    ];
+    $uri_fields = explode(',', $query_array['uri_fields']);
 
-    foreach ($data as $datum) {
-      if (preg_match('/^' . $query_array['q'] . '/', $datum['label'])) {
-        $results[] = $datum;
+    // @todo: Get all terms in a vocab, plus their URIs. Only return terms if they have a URI.
+    $terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree(trim($query_array['vid']));
+    $results= [];
+    foreach ($terms as $term) {
+      if (preg_match('/^' . $query_array['q'] . '/i', $term->name)) {
+        $term_entity = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($term->tid);
+        foreach ($uri_fields as $uri_field_name) {
+          if ($term_entity && $term_entity->hasField($uri_field_name)) {
+            $uri = $term->{$uri_field_name}->value;
+	    if (!is_null($uri)) {
+              $results[] = ['label' => $term->name, 'uri' => $uri];
+            }
+          }
+        }
       }
-    }    
-
+    }
+    
     return $results;
   }
 

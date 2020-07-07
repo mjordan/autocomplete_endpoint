@@ -12,11 +12,11 @@ class Node implements AutocompleteEndpointDataSourceInterface {
    */
   public function getData($query_string) {
     parse_str($query_string, $query_array);
-    if (!array_key_exists('contenttype', $query_array)) {
-      return ['The Node data source requires a contenttype= query parameter.'];
+    if (!array_key_exists('content_type', $query_array)) {
+      return ['The Node data source requires a content_type= query parameter.'];
     }
     // A comma-delimited list of field names where URIs are stored in nodes of
-    // the type specified in contenttype=.
+    // the type specified in content_type=.
     if (!array_key_exists('uri_fields', $query_array)) {
       return ['uri_fields= query parameter is required.'];
     }
@@ -28,7 +28,7 @@ class Node implements AutocompleteEndpointDataSourceInterface {
 
     $query = \Drupal::entityQuery('node');
     $query->condition('status', 1);
-    $query->condition('type', $query_array['contenttype']);
+    $query->condition('type', $query_array['content_type']);
     $query->condition('title.value', $query_array['q'], 'STARTS_WITH');
     $entity_ids = $query->execute();
     $nids = array_values($entity_ids);

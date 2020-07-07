@@ -48,8 +48,8 @@ This module currently provides three data source plugins, 1) a 'vocabulary' plug
 
 > Note that even though the `vocabulary` plugin exposes Drupal vocabulary terms and their URIs, the Linked Data Lookup field type in the consuming Drupal is not a taxonomy reference field, it is a structured field comprised of two text subfields, one for the label and the other for the URI. In other words, the source Drupal manages the Linked Data vocabulary as a standard Drupal vocabulary (with a URI field added) but the consuming Drupal stores the exposed Linked Data as pairs of labels and URIs.
 
-* The endpoint for the "node" plugin is `/autocomplete_endpoint/node?contenttype=my_content_type&uri_fields=field_uri&q=`
-   * The 'contenttype' parameter is the machine name of the content type of the nodes you want to expose.
+* The endpoint for the "node" plugin is `/autocomplete_endpoint/node?content_type=my_content_type&uri_fields=field_uri&q=`
+   * The 'content_type' parameter is the machine name of the content type of the nodes you want to expose.
    * The 'uri_fields' parameter is a comma-separated list of field on the vocabulary that contain URIs. These fields should have a maximum of 1 value (i.e., not multivalued).
    * For example, using nodes of content type `my_content_type` with a field `field_uri`, entering 'd' in the autocomplete field configured to use this endpoint will produce the results `[{"label":"Dogs","uri":"http:\/\/example.com\/dogs"},{"label":"Donuts","uri":"http:\/\/example.com\/donuts"}]`.
 
@@ -65,7 +65,7 @@ To add a new endpoint field to a content type that consumes a shared Linked data
 * Endpoint type: `URL Argument Type`
 * Base URL
    * If you are using the `vocabulary` plugin: [your Drupal's base URL]`/autocomplete_endpoint/vocabulary?vid=islandora_models&uri_fields=field_external_uri&q=` (`vid` and `uri_fields` values will vary depending on which vocabulary is being exposed; `q=` should be at the end) 
-   * If you are using the `node` plugin: [your Drupal's base URL]`/autocomplete_endpoint/node?contenttype=my_content_type&uri_fields=field_uri&q=` (`contenttype` and `uri_fields` values will vary depending on which content type is being exposed; `q=` should be at the end) 
+   * If you are using the `node` plugin: [your Drupal's base URL]`/autocomplete_endpoint/node?content_type=my_content_type&uri_fields=field_uri&q=` (`content_type` and `uri_fields` values will vary depending on which content type is being exposed; `q=` should be at the end) 
 * Result record JSON path: `[*]`
 * Label JSON key: `label`
 * URL JSON key: `uri`

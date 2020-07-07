@@ -2,7 +2,7 @@
 
 ## Introduction
 
-A Drupal 8/9 module that provides a generic HTTP endpoint for exposing vocabularies for consumption by Drupal autocomplete form elements. Initially intended to be used with [Linked Data Lookup Field](https://drupal.org/project/linked_data_field), which "Provides an autocomplete field widget that pulls suggested matches and URLs from authoritative sources." The Autocomplete Endpoint module enables Drupal to be an authoritative source for Linked Data vocabularies.
+A Drupal 8/9 module that provides an HTTP endpoint for exposing vocabularies for consumption by Drupal autocomplete form elements. Initially intended to be used with [Linked Data Lookup Field](https://drupal.org/project/linked_data_field), which "Provides an autocomplete field widget that pulls suggested matches and URLs from authoritative sources." The Autocomplete Endpoint module enables Drupal to be an authoritative source for Linked Data vocabularies.
 
 Here, "vocabularies" are not necessarily Drupal vocabularies (although they can be, but they can also be groups of nodes, as explained below). "Vocabularies" are any collection of terms intended for reuse by Linked Data consumers. This module enables vocabularies to be maintained in a "provider" Drupal instance; these vocabularies can then be used by any number of "consumer" Drupal instances. The result is that all consumers of a vocabulary share Linked Data that can be used to query, traverse, and aggregate content across all members of the network.
 
@@ -16,7 +16,7 @@ Some use cases for this ability are:
 
 In each case, the "provider" Drupal instance (the one running this module) maintains the shared vocabulary on behalf of the "consumers", which run the Linked Data Lookup Field module. The provider can itself run the Linked Data Lookup Field module and use the shared vocabulary, making it both the provider and a consumer.
 
-Vocabularies exposed in this way are not limited to use by other Drupal instances. The data that this module exposes is consistent with the data exposed by the Library of Congress and other providers of Linked Data.
+Vocabularies exposed in this way are not limited to use by other Drupal instances. The data that this module exposes is consistent with the data exposed by the [Library of Congress](http://id.loc.gov/) and other providers of Linked Data vocabularies.
 
 ## Requirements
 
@@ -64,12 +64,17 @@ To add a new endpoint field to a content type that consumes a shared Linked data
 * Endpoint type: `URL Argument Type`
 * Base URL
    * If you are using the `vocabulary` plugin: [your Drupal's base URL]`/autocomplete_endpoint/vocabulary?vid=islandora_models&uri_fields=field_external_uri&q=` (`vid` and `uri_fields` values will vary depending on which vocabulary is being exposed; `q=` should be at the end) 
-   * If you are using the `node` plugin: [your Drupal's base URL]`/autocomplete_endpoint/node?content_type=my_content_type&uri_fields=field_uri&q=` (`content_type` and `uri_fields` values will vary depending on which content type is being exposed; `q=` should be at the end) 
+   * If you are using the `node` plugin: [your Drupal's base URL]`/autocomplete_endpoint/node?content_type=my_content_type&uri_fields=field_uri&q=` (`content_type` and `uri_fields` values will vary depending on which content type is being exposed; `q=` should be at the end)
+   * Reminder: you won't be able to guess at these values, you will need to get the exact URL to use from the administrator of the provider Drupal instance.
 * Result record JSON path: `[*]`
 * Label JSON key: `label`
 * URL JSON key: `uri`
 
-Your endpoint is now configured as a field that can be added to a content type. To add it, go to Admin > Structure > Content types > [your content type] > Manage fields > Add field > and choose "Linked Data Lookup Field" as the field type, then choose the new endpoint you created following the instructions above.
+Your endpoint is now configured as a field that can be added to a content type. To add it:
+
+1. Go to Admin > Structure > Content types > [your content type] > Manage fields > Add field
+1. Choose "Linked Data Lookup Field" as the field type
+1. Choose the new endpoint you created following the instructions above.
 
 ## Current maintainer
 

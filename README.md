@@ -2,7 +2,9 @@
 
 ## Introduction
 
-A Drupal 8/9 module that provides a generic HTTP endpoing for exposing data for consumption by Drupal autocomplete form elements. Initially intended to be used with [Linked Data Lookup Field](https://drupal.org/project/linked_data_field).
+A Drupal 8/9 module that provides a generic HTTP endpoint for exposing vocabularies for consumption by Drupal autocomplete form elements. Initially intended to be used with [Linked Data Lookup Field](https://drupal.org/project/linked_data_field).
+
+Here, "vocabularies" are not necessarily Drupal vocabularies (although they can be; they can also be nodes), they are any collection of terms intended for reuse by a network of consumers. This module provides the ability for vocabularies to be maintained in a "provider" Drupal instance; these vocabularies can then be used by "consumer" Drupal instances. The result is that all consumers of a vocabulary share Linked Data that can be used to query, traverse, and aggregate content from all members of the network.
 
 ## Use cases
 
@@ -20,7 +22,7 @@ Vocabularies exposed in this way are not limited to use by other Drupal instance
 
 ## Requirements
 
-* There are no hard requirements for installing this module other than Drupal 8, but data it exposes was initially intended to be consumed by [Linked Data Lookup Field](https://drupal.org/project/linked_data_field).
+There are no hard requirements for installing this module other than Drupal 8, but data it exposes was initially intended to be consumed by [Linked Data Lookup Field](https://drupal.org/project/linked_data_field).
 
 This module is Drupal 9 ready.
 
@@ -31,7 +33,7 @@ This module is Drupal 9 ready.
 
 ## Configuration
 
-Currently, this module requires no configuration. Configuration of Linked Data Lookup Field (and other consumers) to use this module will be provided soon.
+This module has no admin settings. 
 
 ## Usage
 

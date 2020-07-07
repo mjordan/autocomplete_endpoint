@@ -35,22 +35,32 @@ Currently, this module requires no configuration. Configuration of Linked Data L
 
 ## Usage
 
-This module currently provides two data source plugins, 1) a sample plugin, intended for developers and 2) a 'vocabulary' plugin that exposes terms with URIs to the consumer.
+### On the Drupal exposing the data
 
-* The endpoint for the "sample" plugin is `/autocomplete_endpoint/sample?q=`
-   * For example, entering 'f' in the autocomplete field configured to use this endoint will produce the results `[{"label":"four","uri":"http:\/\/example.com\/four"},{"label":"five","uri":"http:\/\/example.com\/five"},{"label":"fifteen","uri":"http:\/\/example.com\/fifteen"}]`.
+This module currently provides two data source plugins, 1) a 'vocabulary' plugin that exposes terms with URIs to the consumer, and 2) a sample plugin, intended for developers.
+
 * The endpoint for the "vocabulary" plugin is `/autocomplete_endpoint/vocabulary?vid=islandora_models&uri_fields=field_external_uri&q=p`
    * The 'vid' parameter is the machine name (ID) of the vocabulary you want to expose
    * The 'uri_fields' parameter is a comma-separated list of field on the vocabulary that contain URIs.
    * For example, using a standard Islandora 8 Playbook VM as the host, entering 'p' in the autocomplete field configured to use this endpoint (and with the 'vid' and 'uri_fields' values above) will produce the results `[{"label":"Page","uri":"http:\/\/id.loc.gov\/ontologies\/bibframe\/part"},{"label":"Paged Content","uri":"https:\/\/schema.org\/Book"},{"label":"Publication Issue","uri":"https:\/\/schema.org\/PublicationIssue"}]`.
 
-On the consumer Drupal site running Linked Data Lookup Field, when you "Add Linked Data Lookup Endpoint", use the following settings for the `vocabulary` endpoint:
+Note that even though the `vocabulary` plugin exposes Drupal vocabulary terms and their URIs, the Linked Data Lookup field type in the consuming Drupal is not a taxonomy reference field, it is a structured field comprised of two text subfields, one for the label and the other for the URI. In other words, the source Drupal manages the Linked Data vocabulary as a standard Drupal vocabulary (with a URI field added) but the consuming Drupal stores the exposed Linked Data as pairs of labels and URIs.
 
+* The endpoint for the "sample" plugin is `/autocomplete_endpoint/sample?q=`
+   * For example, entering 'f' in the autocomplete field configured to use this endoint will produce the results `[{"label":"four","uri":"http:\/\/example.com\/four"},{"label":"five","uri":"http:\/\/example.com\/five"},{"label":"fifteen","uri":"http:\/\/example.com\/fifteen"}]`.
+
+### On the consumer Drupal site running Linked Data Lookup Field
+
+When you "Add Linked Data Lookup Endpoint", use the following settings for the `vocabulary` endpoint:
+
+* Label: up to you.
 * Endpoint type: `URL Argument Type`
-* Base URL: [your Drupal's base URL]/autocomplete_endpoint/vocabulary?vid=islandora_models&uri_fields=field_external_uri&q= (`vid` and `uri_fields` values will vary; `q=` should be at the end) 
+* Base URL: [your Drupal's base URL]`/autocomplete_endpoint/vocabulary?vid=islandora_models&uri_fields=field_external_uri&q=` (`vid` and `uri_fields` values will vary depending on which vocabulary is being exposed; `q=` should be at the end) 
 * Result record JSON path: `[*]`
-* Label JSON key: 'label'
+* Label JSON key: `label`
 * URL JSON key: `uri`
+
+The endpoint is not configured as a field that can be added to your content type. To add it, go to Structure > Content types > [your content type] > Manage fields > Add field > and choose "Linked Data Lookup Field" as the field type, then choose the new endpoint you created following the instructions above.
 
 ## Current maintainer
 

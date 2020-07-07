@@ -35,6 +35,17 @@ This module is Drupal 9 ready.
 
 Currently, this module requires no configuration. Configuration of Linked Data Lookup Field (and other consumers) to use this module will be provided soon.
 
+## Usage
+
+This module currently provides two data source plugins, 1) a sample plugin, intended for developers and 2) a 'vocabulary' plugin that exposes terms with URIs to the consumer.
+
+* The endpoint for the "sample" plugin is `/autocomplete_endpoint/sample?q=`
+   * For example, entering 'f' in the autocomplete field configured to use this endoint will produce the results `[{"label":"four","uri":"http:\/\/example.com\/four"},{"label":"five","uri":"http:\/\/example.com\/five"},{"label":"fifteen","uri":"http:\/\/example.com\/fifteen"}]`.
+* The endpoint for the "vocabulary" plugin is `/autocomplete_endpoint/vocabulary?vid=islandora_models&uri_fields=field_external_uri&q=p`
+   * The 'vid' parameter is the machine name (ID) of the vocabulary you want to expose
+   * The 'uri_fields' parameter is a comma-separated list of field on the vocabulary that contain URIs.
+   * For example, using a standard Islandora 8 Playbook VM as the host, entering 'p' in the autocomplete field configured to use this endpoint (and with the 'vid' and 'uri_fields' values above) will produce the results `[{"label":"Page","uri":"http:\/\/id.loc.gov\/ontologies\/bibframe\/part"},{"label":"Paged Content","uri":"https:\/\/schema.org\/Book"},{"label":"Publication Issue","uri":"https:\/\/schema.org\/PublicationIssue"}]`.
+
 ## Current maintainer
 
 * [Mark Jordan](https://github.com/mjordan)

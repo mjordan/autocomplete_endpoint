@@ -24,19 +24,21 @@ class Vocabulary implements AutocompleteEndpointDataSourceInterface {
       return ['The Vocabulary data source requires a q= query parameter.']; 
     }
 
-    $uri_fields = explode(',', $query_array['uri_fields']);
+    $uri_field_names = explode(',', $query_array['uri_fields']);
 
-    // @todo: Get all terms in a vocab, plus their URIs. Only return terms if they have a URI.
+    // Get all terms in the specified vocab, plus their URIs. Only return terms
+    // if they have a URI.
     $terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree(trim($query_array['vid']));
     $results= [];
     foreach ($terms as $term) {
       if (preg_match('/^' . $query_array['q'] . '/i', $term->name)) {
         $term_entity = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($term->tid);
-        foreach ($uri_fields as $uri_field_name) {
+        foreach ($uri_field_names as $uri_field_name) {
           if ($term_entity && $term_entity->hasField($uri_field_name)) {
-            $uri = $term->{$uri_field_name}->value;
-	    if (!is_null($uri)) {
-              $results[] = ['label' => $term->name, 'uri' => $uri];
+            $uri = $term_entity->get($uri_field_name)->getValue();
+            // Assumes that the URI field has the key 'uri'.
+	    if (array_key_exists('uri', $uri[0]) && !is_null($uri[0]['uri'])) {
+              $results[] = ['label' => $term->name, 'uri' => $uri[0]['uri']];
             }
           }
         }

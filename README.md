@@ -49,7 +49,7 @@ Note that even though the `vocabulary` plugin exposes Drupal vocabulary terms an
 * The endpoint for the "node" plugin is `/autocomplete_endpoint/node?contenttype=my_content_type&uri_fields=field_uri&q=`
    * The 'contenttype' parameter is the machine name of the content type of the nodes you want to expose.
    * The 'uri_fields' parameter is a comma-separated list of field on the vocabulary that contain URIs. Fields should have a maximum of 1 value (i.e., not multivalued).
-   * For example, using nodes of content type 'my_content_type` with a field `field_uri`, entering 'd' in the autocomplete field configured to use this endpoint will produce the results `[{"label":"Dogs","uri":"http:\/\/example.com\/dogs"},{"label":"Donuts","uri":"http:\/\/example.com\/donuts"}]`.
+   * For example, using nodes of content type `my_content_type` with a field `field_uri`, entering 'd' in the autocomplete field configured to use this endpoint will produce the results `[{"label":"Dogs","uri":"http:\/\/example.com\/dogs"},{"label":"Donuts","uri":"http:\/\/example.com\/donuts"}]`.
 
 * The endpoint for the "sample" plugin is `/autocomplete_endpoint/sample?q=`
    * For example, entering 'f' in the autocomplete field configured to use this endoint will produce the results `[{"label":"four","uri":"http:\/\/example.com\/four"},{"label":"five","uri":"http:\/\/example.com\/five"},{"label":"fifteen","uri":"http:\/\/example.com\/fifteen"}]`.

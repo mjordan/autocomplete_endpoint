@@ -43,4 +43,5 @@ class AutocompleteController extends ControllerBase {
     $results = $data_source->getData($query_string);
     return new JsonResponse($results);
   }
+
 }

@@ -13,7 +13,7 @@ class Sample implements AutocompleteEndpointDataSourceInterface {
   public function getData($query_string) {
     parse_str($query_string, $query_array);
     if (!array_key_exists('q', $query_array)) {
-      return ['The Sample data source requires a q= query parameter.']; 
+      return ['The Sample data source requires a q= query parameter.'];
     }
     $data = [
       ['label' => 'one', 'uri' => 'http://example.com/one'],
@@ -31,9 +31,9 @@ class Sample implements AutocompleteEndpointDataSourceInterface {
       if (preg_match('/^' . $query_array['q'] . '/', $datum['label'])) {
         $results[] = $datum;
       }
-    }    
+    }
 
-    // results is an array of label => uri pairs matching the user's input
+    // Results is an array of label => uri pairs matching the user's input
     // in this case, that input is in the 'q' URL parameter.
     return $results;
   }

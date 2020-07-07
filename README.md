@@ -44,6 +44,14 @@ This module currently provides two data source plugins, 1) a sample plugin, inte
    * The 'uri_fields' parameter is a comma-separated list of field on the vocabulary that contain URIs.
    * For example, using a standard Islandora 8 Playbook VM as the host, entering 'p' in the autocomplete field configured to use this endpoint (and with the 'vid' and 'uri_fields' values above) will produce the results `[{"label":"Page","uri":"http:\/\/id.loc.gov\/ontologies\/bibframe\/part"},{"label":"Paged Content","uri":"https:\/\/schema.org\/Book"},{"label":"Publication Issue","uri":"https:\/\/schema.org\/PublicationIssue"}]`.
 
+On the consumer Drupal site running Linked Data Lookup Field, when you "Add Linked Data Lookup Endpoint", use the following settings for the `vocabulary` endpoint:
+
+* Endpoint type: `URL Argument Type`
+* Base URL: [your Drupal's base URL]/autocomplete_endpoint/vocabulary?vid=islandora_models&uri_fields=field_external_uri&q= (`vid` and `uri_fields` values will vary; `q=` should be at the end) 
+* Result record JSON path: `[*]`
+* Label JSON key: 'label'
+* URL JSON key: `uri`
+
 ## Current maintainer
 
 * [Mark Jordan](https://github.com/mjordan)

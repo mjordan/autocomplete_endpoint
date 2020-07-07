@@ -37,7 +37,7 @@ Currently, this module requires no configuration. Configuration of Linked Data L
 
 ### On the Drupal instance exposing the data (the "provider")
 
-This module currently provides three data source plugins, 1) a 'vocabulary' plugin that exposes terms with URIs to the consumer, and 2) a 'node' plugin that exposes titles and URIs from nodes, and 3) a plugin intended as a simple example for developers.
+This module currently provides three data source plugins, 1) a 'vocabulary' plugin that exposes terms with URIs to the consumer, and 2) a 'node' plugin that exposes titles and URIs of nodes, and 3) a plugin intended as a simple example for developers.
 
 * The endpoint for the "vocabulary" plugin is `/autocomplete_endpoint/vocabulary?vid=islandora_models&uri_fields=field_external_uri&q=`
    * The 'vid' parameter is the machine name (ID) of the vocabulary you want to expose.
@@ -56,8 +56,9 @@ This module currently provides three data source plugins, 1) a 'vocabulary' plug
 
 ### On the Drupal instance running Linked Data Lookup Field (the "consumer")
 
-When you "Add Linked Data Lookup Endpoint", use the following settings for the `vocabulary` endpoint:
+When you "Add Linked Data Lookup Endpoint", use the following settings for endpoint:
 
+* Go to Admin > Structure > Linked Data Lookup Endpoint > Add Linked Data Lookup Endpoint.
 * Label: up to you.
 * Endpoint type: `URL Argument Type`
 * Base URL
@@ -67,7 +68,7 @@ When you "Add Linked Data Lookup Endpoint", use the following settings for the `
 * Label JSON key: `label`
 * URL JSON key: `uri`
 
-Your endpoints is now configured as a field that can be added to your content type. To add it, go to Structure > Content types > [your content type] > Manage fields > Add field > and choose "Linked Data Lookup Field" as the field type, then choose the new endpoint you created following the instructions above.
+Your endpoints is now configured as a field that can be added to your content type. To add it, go to Admin > Structure > Content types > [your content type] > Manage fields > Add field > and choose "Linked Data Lookup Field" as the field type, then choose the new endpoint you created following the instructions above.
 
 ## Current maintainer
 

@@ -4,8 +4,6 @@
 
 A Drupal 8/9 module that provides a generic HTTP endpoing for exposing data for consumption by Drupal autocomplete form elements. Initially intended to be used with [Linked Data Lookup Field](https://drupal.org/project/linked_data_field).
 
-Currently still a proof of concept.
-
 ## Use cases
 
 The Linked Data Lookup Field module "Provides an autocomplete field widget that pulls suggested matches and URLs from authoritative sources." In fields of this type, a subject heading, for example, is human readable, but it also contain the heading's Linked Data URI from an autoritative vocabulary such as the [Library of Congress Subject Headings](http://id.loc.gov/authorities/subjects.html). This means that the heading, and the node it applies to, is part of the Linked Open Data environment and can be used in any tools and services that rely on Linked Data URIs.

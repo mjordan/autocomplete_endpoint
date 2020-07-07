@@ -24,12 +24,17 @@ class Sample implements AutocompleteEndpointDataSourceInterface {
       ['label' => 'fifteen', 'uri' => 'http://example.com/fifteen'],
     ];
 
+    // Even though this sample plugin just iterates over the members
+    // of the above array, a plugin could do a db query, or load a set
+    // of entities from storage.
     foreach ($data as $datum) {
       if (preg_match('/^' . $query_array['q'] . '/', $datum['label'])) {
         $results[] = $datum;
       }
     }    
 
+    // results is an array of label => uri pairs matching the user's input
+    // in this case, that input is in the 'q' URL parameter.
     return $results;
   }
 

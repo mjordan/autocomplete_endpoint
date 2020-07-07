@@ -14,7 +14,7 @@ The Autocomplete Endpoint module allows a Drupal instance to provide authoritati
 * A group of libraries running Islandora are collaborating on creating distributed collections on a specific theme, and they want subject specialists from their partner insitutions to assist with creating Islandora objects. With this module, they can all use the same set of locally managed name entities.
 * A group of allied community organizations all use Drupal as their CMS, and each runs local training events. Using this module, all members of this group can use the same set of keywords to describe their events, enabling querying/grouping of those events across all members.
 
-In each case, one of the Drupal instances (the one running this module) maintains the shared vocabulary on behalf of the others, but they all use the shared vocabulary locally.
+In each case, the "provider" Drupal instance (the one running this module) maintains the shared vocabulary on behalf of the "consumers", which run the Linked Data Lookup Field module. The provider can itself run the Linked Data Lookup Field module and use the shared vocabulary, making it both the provider and a consumer.
 
 Vocabularies exposed in this way are not limited to use by other Drupal instances. The data that this module exposes is consistent with the data exposed by the Library of Congress and other providers of Linked Data.
 
@@ -56,7 +56,7 @@ This module currently provides three data source plugins, 1) a 'vocabulary' plug
 
 ### On the Drupal instance running Linked Data Lookup Field (the "consumer")
 
-When you "Add Linked Data Lookup Endpoint", use the following settings for endpoint:
+To add a new endpoint field to a content type that consumes a shared Linked data vocabulary, do the following:
 
 * Go to Admin > Structure > Linked Data Lookup Endpoint > Add Linked Data Lookup Endpoint.
 * Label: up to you.
@@ -68,7 +68,7 @@ When you "Add Linked Data Lookup Endpoint", use the following settings for endpo
 * Label JSON key: `label`
 * URL JSON key: `uri`
 
-Your endpoints is now configured as a field that can be added to your content type. To add it, go to Admin > Structure > Content types > [your content type] > Manage fields > Add field > and choose "Linked Data Lookup Field" as the field type, then choose the new endpoint you created following the instructions above.
+Your endpoint is now configured as a field that can be added to a content type. To add it, go to Admin > Structure > Content types > [your content type] > Manage fields > Add field > and choose "Linked Data Lookup Field" as the field type, then choose the new endpoint you created following the instructions above.
 
 ## Current maintainer
 

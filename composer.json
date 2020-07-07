@@ -1,0 +1,15 @@
+{
+  "name": "mjordan/autocomplete_endpoint",
+  "description": "Drupal 8/9 module that provides a generic HTTP endpoing for exposing data for consumption by Drupal autocomplete form elements.",
+  "type": "drupal-module",
+  "keywords": ["Drupal"],
+  "homepage": "https://github.com/mjordan/autocomplete_endpoint",
+  "license": "GPL-2.0+",
+  "authors": [
+    {
+      "name": "Mark Jordan",
+      "email": "mjordan@sfu.ca",
+      "role": "Maintainer"
+    }
+  ]
+}

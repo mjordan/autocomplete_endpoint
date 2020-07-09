@@ -1,0 +1,12 @@
+autocomplete_endpoint.add_action:
+  route_name: entity.autocomplete_endpoint.add_form
+  title: 'Add autocomplete endpoint'
+  appears_on:
+    - entity.autocomplete_endpoint.list
+
+autocomplete_endpoint.list_action:
+  route_name: entity.autocomplete_endpoint.list
+  title: 'List autocomplete endpoints'
+  appears_on:
+    - entity.autocomplete_endpoint.add_form
+    - entity.autocomplete_endpoint.edit_form

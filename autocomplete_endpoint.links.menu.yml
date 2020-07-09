@@ -1,0 +1,5 @@
+system.autocomplete_endpoint.menu:
+  title: Autocomplete Endpoints
+  route_name: entity.autocomplete_endpoint.list
+  parent: system.admin_config_services
+  description: 'Confgure Autocomplete Endpoints.'

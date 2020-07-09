@@ -1,0 +1,29 @@
+autocomplete_endpoint.autocomplete_endpoint.*:
+  type: config_entity
+  label: 'Autocomplete Endpoint'
+  mapping:
+    id:
+      type: string
+      label: 'Endpoint ID'
+    uuid:
+      type: string
+      label: 'UUID'
+    label:
+      type: label
+      label: 'Label'
+      translatable: true
+    type:
+      type: string
+      label: 'Type'
+    vid:
+      type: string
+      label: 'Vocabulary ID'
+    content_type:
+      type: string
+      label: 'Content type'
+    uri_field:
+      type: string
+      label: 'URI field'
+    langcode:
+      type: string
+      label: 'Default language'

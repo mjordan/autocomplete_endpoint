@@ -2,6 +2,8 @@
 
 namespace Drupal\autocomplete_endpoint\Plugin\DataSource;
 
+use Drupal\autocomplete_endpoint\Entity\AutocompleteEndpoint;
+
 /**
  * Plugin that returns labels and URIs for terms in a vocabulary.
  */
@@ -10,7 +12,9 @@ class Vocabulary implements AutocompleteEndpointDataSourceInterface {
   /**
    * {@inheritdoc}
    */
-  public function getData($query_string) {
+  public function getData($endpoint, $query_string) {
+    devel_debug($endpoint);
+    devel_debug($query_string);
     parse_str($query_string, $query_array);
     if (!array_key_exists('vid', $query_array)) {
       return ['The Vocabulary data source requires a vid= query parameter.'];

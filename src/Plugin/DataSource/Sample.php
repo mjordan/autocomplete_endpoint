@@ -10,7 +10,7 @@ class Sample implements AutocompleteEndpointDataSourceInterface {
   /**
    * {@inheritdoc}
    */
-  public function getData($query_string) {
+  public function getData($endpoint, $query_string) {
     parse_str($query_string, $query_array);
     if (!array_key_exists('q', $query_array)) {
       return ['The Sample data source requires a q= query parameter.'];

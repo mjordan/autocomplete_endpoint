@@ -10,25 +10,23 @@ class Node implements AutocompleteEndpointDataSourceInterface {
   /**
    * {@inheritdoc}
    */
-  public function getData($query_string) {
+  public function getData($endpoint, $query_string) {
     parse_str($query_string, $query_array);
-    if (!array_key_exists('content_type', $query_array)) {
-      return ['The Node data source requires a content_type= query parameter.'];
+    if (strlen($endpoint->content_type) < 1) {
+      return ['No content type configured for this endpoint.'];
     }
-    // A comma-delimited list of field names where URIs are stored in nodes of
-    // the type specified in content_type=.
-    if (!array_key_exists('uri_fields', $query_array)) {
-      return ['uri_fields= query parameter is required.'];
+    if (strlen($endpoint->uri_field) < 0) {
+      return ['No URI field configured for this endpoint.'];
     }
     if (!array_key_exists('q', $query_array)) {
-      return ['The Node data source requires a q= query parameter.'];
+      return ['No q= query parameter in request.'];
     }
 
     $uri_field_names = explode(',', $query_array['uri_fields']);
 
     $query = \Drupal::entityQuery('node');
     $query->condition('status', 1);
-    $query->condition('type', $query_array['content_type']);
+    $query->condition('type', $endpoint->content_type);
     $query->condition('title.value', $query_array['q'], 'STARTS_WITH');
     $entity_ids = $query->execute();
     $nids = array_values($entity_ids);
@@ -36,13 +34,11 @@ class Node implements AutocompleteEndpointDataSourceInterface {
     $node_storage = \Drupal::entityTypeManager()->getStorage('node')->loadMultiple($nids);
     $results = [];
     foreach ($node_storage as $node) {
-      foreach ($uri_field_names as $uri_field_name) {
-        $label = $node->get('title')->value;
-        if (preg_match('/^' . $query_array['q'] . '/i', $label)) {
-          if ($node->hasField($uri_field_name)) {
-            $uri = $node->get($uri_field_name)->value;
-            $results[] = ['label' => $label, 'uri' => $uri];
-          }
+      $label = $node->get('title')->value;
+      if (preg_match('/^' . $query_array['q'] . '/i', $label)) {
+        if ($node->hasField($endpoint->uri_field)) {
+          $uri = $node->get($endpoint->uri_field)->value;
+          $results[] = ['label' => $label, 'uri' => $uri];
         }
       }
     }

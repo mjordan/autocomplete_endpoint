@@ -31,13 +31,11 @@ This module is Drupal 9 ready.
 
 ## Configuration
 
-This module has no admin settings. 
+Enpoints are configured at `/admin/autocomplete_endpoint`. Once they exist, they can be used as described below.
 
 ## Usage
 
 ### On the Drupal instance exposing the data (the "provider")
-
-This module currently provides three Linked Data services, 1) a "vocabulary" service that exposes terms with URIs to the consumer, 2) a "node" service that exposes titles and URIs of nodes, and 3) a service intended as a simple example for developers.
 
 * The endpoint for the "vocabulary" service is `/autocomplete_endpoint/vocabulary?vid=islandora_models&uri_fields=field_external_uri&q=`
    * The "vid" parameter is the machine name (ID) of the vocabulary you want to expose.

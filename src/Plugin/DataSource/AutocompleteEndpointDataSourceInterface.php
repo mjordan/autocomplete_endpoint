@@ -18,7 +18,10 @@ interface AutocompleteEndpointDataSourceInterface {
    *
    * @return array
    *   An array of assocative arrays containing label => uri members.
-   *   Q: what about errors, like a missing required query parameter?
+   *
+   *   Errors, like a missing required query parameter, are returned as
+   *   a single-member array. See examples in the Node and Vocabulary
+   *   plugins.
    */
   public function getData($endpoint, $query_string);
 

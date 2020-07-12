@@ -5,7 +5,7 @@ namespace Drupal\autocomplete_endpoint\Plugin\Form;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Class RobotEditForm.
+ * Class AutocompleteEndpointEditForm.
  *
  * @ingroup autocomplete_endpoint
  */

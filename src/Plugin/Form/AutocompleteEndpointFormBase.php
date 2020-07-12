@@ -16,24 +16,24 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class AutocompleteEndpointFormBase extends EntityForm {
 
   /**
-   * An entity query factory for the robot entity type.
+   * An entity query factory for the endpoint entity type.
    *
    * @var \Drupal\Core\Entity\EntityStorageInterface
    */
   protected $entityStorage;
 
   /**
-   * Construct the RobotFormBase.
+   * Construct the AutocompleteEndpointFormBase.
    *
    * @param \Drupal\Core\Entity\EntityStorageInterface $entity_storage
-   *   An entity query factory for the robot entity type.
+   *   An entity query factory for the autocomplet endpoint entity type.
    */
   public function __construct(EntityStorageInterface $entity_storage) {
     $this->entityStorage = $entity_storage;
   }
 
   /**
-   * Factory method for RobotFormBase.
+   * Factory method for AutocompleteEndpointFormBase..
    */
   public static function create(ContainerInterface $container) {
     $form = new static($container->get('entity_type.manager')->getStorage('autocomplete_endpoint'));
@@ -52,7 +52,7 @@ class AutocompleteEndpointFormBase extends EntityForm {
    *   An associative array containing the current state of the form.
    *
    * @return array
-   *   An associative array containing the robot add/edit form.
+   *   An associative array containing the add/edit form.
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
     $form = parent::buildForm($form, $form_state);
@@ -74,7 +74,7 @@ class AutocompleteEndpointFormBase extends EntityForm {
       '#machine_name' => [
         'exists' => [$this, 'exists'],
         'replace_pattern' => '([^a-z0-9_]+)|(^custom$)',
-        'error' => 'The machine-readable name must be unique, and can only contain lowercase letters, numbers, and underscores. Additionally, it can not be the reserved word "custom".',
+        'error' => 'The machine-readable name must be unique, and can only contain lowercase letters, numbers, and underscores. Additionally, it cannot be the reserved word "custom".',
       ],
       '#disabled' => !$autocomplete_endpoint->isNew(),
     ];
@@ -121,7 +121,7 @@ class AutocompleteEndpointFormBase extends EntityForm {
   }
 
   /**
-   * Checks for an existing robot.
+   * Checks for an existing endpoint.
    *
    * @param string|int $entity_id
    *   The entity ID.
@@ -131,7 +131,7 @@ class AutocompleteEndpointFormBase extends EntityForm {
    *   The form state.
    *
    * @return bool
-   *   TRUE if this format already exists, FALSE otherwise.
+   *   TRUE if this ID already exists, FALSE otherwise.
    */
   public function exists($entity_id, array $element, FormStateInterface $form_state) {
     $query = $this->entityStorage->getQuery();
@@ -174,8 +174,17 @@ class AutocompleteEndpointFormBase extends EntityForm {
   public function validateForm(array &$form, FormStateInterface $form_state) {
     parent::validateForm($form, $form_state);
 
-    // Add code here to validate your config entity's form elements.
-    // Nothing to do here.
+    if ($form_state->getValue('type') == 'vocabulary') {
+      if (empty($form_state->getValue('vid'))) {
+        $form_state->setErrorByName('vid', t('Vocabulary endpoints require a vocabulary ID.'));
+      }
+    }
+    if ($form_state->getValue('type') == 'node') {
+      if (empty($form_state->getValue('content_type'))) {
+        $form_state->setErrorByName('content_type', t('Node endpoints require a content type.'));
+      }
+    }
+
   }
 
   /**

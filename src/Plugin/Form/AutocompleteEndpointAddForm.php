@@ -5,11 +5,11 @@ namespace Drupal\autocomplete_endpoint\Plugin\Form;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Class RobotAddForm.
+ * Class AutocompleteEndpointAddForm.
  *
- * Provides the add form for our Robot entity.
+ * Provides the add form for our endpoint entity.
  *
- * @ingroup config_entity_example
+ * @ingroup autocomplete_endpoint 
  */
 class AutocompleteEndpointAddForm extends AutocompleteEndpointFormBase {
 

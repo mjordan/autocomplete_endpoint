@@ -68,7 +68,7 @@ To add a new endpoint field to a content type that consumes a shared Linked data
 * Label: up to you.
 * Endpoint type: `URL Argument Type`
 * Base URL, as described in the previous section
-   * Reminder: you won't be able to guess at these values, you will need to get the exact URL to use from the administrator of the provider Drupal instance.
+   * Reminder: you won't be able to guess at this value, you will need to get the exact URL to use from the administrator of the provider Drupal instance.
 * Result record JSON path: `[*]`
 * Label JSON key: `label`
 * URL JSON key: `uri`

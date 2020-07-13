@@ -31,12 +31,21 @@ This module is Drupal 9 ready.
 
 ## Configuration
 
+### Providing URIs for things
+
+Before you create autocomplete endpoints, you will need to add a special field to the vocabulary or content type that you want to expose as linked data. This field is not really that special, but it must be present. You will need to identify this field when you create your endpoints as described below.
+
+This field will hold the Linked Data URI for each vocabulary term or node. When you create it, choose "Text (plain)". It doesn't matter what you name it.
+
+### Creating the autocomplete endpoints
+
 Enpoints are configured at `/admin/autocomplete_endpoint`. Once they exist, they can be used as described in the "Usage" section below.
 
-The "machine name" for the vocabulary ID and content type are obtainable in the following ways:
+The configuration form asks for the "machine name" of various things. This is obtainable in the following ways:
 
 * Vocabulary ID: when you are viewing the list of terms in a vocabulary, e.g., `/admin/structure/taxonomy/manage/genre/overview`, the vocabulary's machine name is the string that comes before "overview", in this example "genre".
 * Node content type: when you are viewing the list of fields in a content type, e.g., `/admin/structure/types/manage/islandora_object/fields`, the content type's machine name is the string that comes before "fields", in this example "islandora_object".
+* URI field: for both vocabularies and content types, when you are viewing the "Manage Fields" tab, the machine name of the field you have configured to store Linked Data URIs.
 
 ## Usage
 

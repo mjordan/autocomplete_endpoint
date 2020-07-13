@@ -16,6 +16,9 @@ Some use cases for this ability are:
 
 In each case, the "provider" Drupal instance (the one running this module) maintains the shared vocabulary on behalf of the "consumers", which run the Linked Data Lookup Field module. The provider can itself run the Linked Data Lookup Field module and use the shared vocabulary, making it both the provider and a consumer.
 
+
+> Note that even though a `vocabulary` endpoint configuration exposes Drupal vocabulary terms and their URIs, the Linked Data Lookup field type in the consuming Drupal is not a taxonomy reference field, it is a structured field comprised of two text subfields, one for the label and the other for the URI. In other words, the source Drupal manages the Linked Data vocabulary as a standard Drupal vocabulary (with a URI field added) but the consuming Drupal stores the exposed Linked Data as pairs of labels and URIs.
+
 Vocabularies exposed in this way are not limited to use by other Drupal instances. The data that this module exposes is consistent with the data exposed by the [Library of Congress](http://id.loc.gov/) and other providers of Linked Data vocabularies.
 
 ## Requirements
@@ -56,8 +59,6 @@ Once you have configured an endpoint, it is ready for consumers to use. You will
 [your Drupal's hostname]`/autocomplete_endpoint/myendpointsmachinename?q=`
 
 where `myendpointsmachinename` is the machine name of the autocomplete endpoint. Note that the `q` URL parameter is empty.
-
-> Note that even though a `vocabulary` endpoint configuration exposes Drupal vocabulary terms and their URIs, the Linked Data Lookup field type in the consuming Drupal is not a taxonomy reference field, it is a structured field comprised of two text subfields, one for the label and the other for the URI. In other words, the source Drupal manages the Linked Data vocabulary as a standard Drupal vocabulary (with a URI field added) but the consuming Drupal stores the exposed Linked Data as pairs of labels and URIs.
 
 ### On the Drupal instance running Linked Data Lookup Field (the "consumer")
 

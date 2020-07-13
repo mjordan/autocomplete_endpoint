@@ -31,28 +31,24 @@ This module is Drupal 9 ready.
 
 ## Configuration
 
-Enpoints are configured at `/admin/autocomplete_endpoint`. Once they exist, they can be used as described below.
+Enpoints are configured at `/admin/autocomplete_endpoint`. Once they exist, they can be used as described in the "Usage" section below.
+
+The "machine name" for the vocabulary ID and content type are obtainable in the following ways:
+
+* Vocabulary ID: when you are viewing the list of terms in a vocabulary, e.g., `/admin/structure/taxonomy/manage/genre/overview`, the vocabulary's machine name is the string that comes before "overview", in this example "genre".
+* Node content type: when you are viewing the list of fields in a content type, e.g., `/admin/structure/types/manage/islandora_object/fields`, the content type's machine name is the string that comes before "fields", in this example "islandora_object".
 
 ## Usage
 
 ### On the Drupal instance exposing the data (the "provider")
 
-* The endpoint for the "vocabulary" service is `/autocomplete_endpoint/vocabulary?vid=islandora_models&uri_fields=field_external_uri&q=`
-   * The "vid" parameter is the machine name (ID) of the vocabulary you want to expose.
-   * The "uri_fields" parameter is a comma-separated list of field on the vocabulary that contain URIs.
-   * The "q" parameter is popluated by the Linked Data Lookup Field module and should be at the end of the URL.
-   * For example, using a standard Islandora 8 Playbook VM as the host, entering "p" in the autocomplete field configured to use this endpoint (and with the "vid" and "uri_fields" values above) will produce the results `[{"label":"Page","uri":"http:\/\/id.loc.gov\/ontologies\/bibframe\/part"},{"label":"Paged Content","uri":"https:\/\/schema.org\/Book"},{"label":"Publication Issue","uri":"https:\/\/schema.org\/PublicationIssue"}]`.
+Once you have configured an endpoint, it is ready for consumers to use. You will need to provide to those sites' admins a base URL. This URL contains the "machine name" of the autocomplete endpoint configuration, which is displayed in the list of endpoints. The base URL will look like:
 
-> Note that even though the `vocabulary` service exposes Drupal vocabulary terms and their URIs, the Linked Data Lookup field type in the consuming Drupal is not a taxonomy reference field, it is a structured field comprised of two text subfields, one for the label and the other for the URI. In other words, the source Drupal manages the Linked Data vocabulary as a standard Drupal vocabulary (with a URI field added) but the consuming Drupal stores the exposed Linked Data as pairs of labels and URIs.
+[your Drupal's hostname]`/autocomplete_endpoint/myendpointsmachinename?q=`
 
-* The endpoint for the "node" service is `/autocomplete_endpoint/node?content_type=my_content_type&uri_fields=field_uri&q=`
-   * The "content_type" parameter is the machine name of the content type of the nodes you want to expose.
-   * The "uri_fields" parameter is a comma-separated list of field on the content type that contain URIs. These fields should have a maximum of 1 value (i.e., not bw multivalued).
-   * The "q" parameter is popluated by the Linked Data Lookup Field module and should be at the end of the URL.
-   * For example, using nodes of content type `my_content_type` with a field `field_uri`, entering "d" in the autocomplete field configured to use this endpoint will produce the results `[{"label":"Dogs","uri":"http:\/\/example.com\/dogs"},{"label":"Donuts","uri":"http:\/\/example.com\/donuts"}]`.
+where `myendpointsmachinename` is the machine name of the autocomplete endpoint. Note that the `q` URL parameter is empty.
 
-* The endpoint for the "sample" service is `/autocomplete_endpoint/sample?q=`
-   * For example, entering "f" in the autocomplete field configured to use this endoint will produce the results `[{"label":"four","uri":"http:\/\/example.com\/four"},{"label":"five","uri":"http:\/\/example.com\/five"},{"label":"fifteen","uri":"http:\/\/example.com\/fifteen"}]`.
+> Note that even though a `vocabulary` endpoint configuration exposes Drupal vocabulary terms and their URIs, the Linked Data Lookup field type in the consuming Drupal is not a taxonomy reference field, it is a structured field comprised of two text subfields, one for the label and the other for the URI. In other words, the source Drupal manages the Linked Data vocabulary as a standard Drupal vocabulary (with a URI field added) but the consuming Drupal stores the exposed Linked Data as pairs of labels and URIs.
 
 ### On the Drupal instance running Linked Data Lookup Field (the "consumer")
 
@@ -62,9 +58,7 @@ To add a new endpoint field to a content type that consumes a shared Linked data
 * Go to Admin > Structure > Linked Data Lookup Endpoint > Add Linked Data Lookup Endpoint.
 * Label: up to you.
 * Endpoint type: `URL Argument Type`
-* Base URL
-   * If you are using the `vocabulary` service: [your Drupal's base URL]`/autocomplete_endpoint/vocabulary?vid=islandora_models&uri_fields=field_external_uri&q=` (`vid` and `uri_fields` values will vary depending on which vocabulary is being exposed; `q=` should be at the end). 
-   * If you are using the `node` service: [your Drupal's base URL]`/autocomplete_endpoint/node?content_type=my_content_type&uri_fields=field_uri&q=` (`content_type` and `uri_fields` values will vary depending on which content type is being exposed; `q=` should be at the end).
+* Base URL, as described in the previous section
    * Reminder: you won't be able to guess at these values, you will need to get the exact URL to use from the administrator of the provider Drupal instance.
 * Result record JSON path: `[*]`
 * Label JSON key: `label`

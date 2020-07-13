@@ -92,6 +92,7 @@ class AutocompleteEndpointFormBase extends EntityForm {
       '#title' => $this->t('Vocabulary ID'),
       '#maxlength' => 255,
       '#default_value' => $autocomplete_endpoint->vid,
+      '#description' => $this->t('Machine name of the vocabulary you are exposing.'),
       '#states' => [
         'visible' => [
           ':input[name="type"]' => ['value' => 'vocabulary'],
@@ -103,6 +104,7 @@ class AutocompleteEndpointFormBase extends EntityForm {
       '#title' => $this->t('Node content type'),
       '#maxlength' => 255,
       '#default_value' => $autocomplete_endpoint->content_type,
+      '#description' => $this->t('Machine name of the node content type you are exposing.'),
       '#states' => [
         'visible' => [
           ':input[name="type"]' => ['value' => 'node'],

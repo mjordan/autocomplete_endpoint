@@ -24,6 +24,12 @@ autocomplete_endpoint.autocomplete_endpoint.*:
     uri_field:
       type: string
       label: 'URI field'
+    provide_default_uri:
+      type: integer
+      label: 'Provide default URI'
+    default_uri_prefix:
+      type: string
+      label: 'Default URI prefix'
     langcode:
       type: string
       label: 'Default language'

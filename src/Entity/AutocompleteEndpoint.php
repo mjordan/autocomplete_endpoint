@@ -36,7 +36,9 @@ use Drupal\Core\Config\Entity\ConfigEntityBase;
  *     "type",
  *     "vid",
  *     "content_type",
- *     "uri_field"
+ *     "uri_field",
+ *     "provide_default_uri",
+ *     "default_uri_prefix"
  *   }
  * )
  */
@@ -90,5 +92,19 @@ class AutocompleteEndpoint extends ConfigEntityBase {
    * @var string
    */
   public $uri_field;
+
+  /**
+   * Whether to provide a default URI.
+   *
+   * @var int
+   */
+  public $provide_default_uri;
+
+  /**
+   * The prefix to use in default URIs.
+   *
+   * @var string
+   */
+  public $default_uri_prefix;
 
 }

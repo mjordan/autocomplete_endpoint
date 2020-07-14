@@ -58,6 +58,7 @@ class AutocompleteEndpointFormBase extends EntityForm {
     $form = parent::buildForm($form, $form_state);
 
     $autocomplete_endpoint = $this->entity;
+    devel_debug($autocomplete_endpoint);
 
     // Build the form.
     $form['label'] = [
@@ -117,6 +118,26 @@ class AutocompleteEndpointFormBase extends EntityForm {
       '#description' => $this->t('Machine name of the field on the vocabulary or content type that contains the URI.'),
       '#maxlength' => 255,
       '#default_value' => $autocomplete_endpoint->uri_field,
+    ];
+    $form['provide_default_uri'] = [
+      '#type' => 'checkbox',
+      '#default_value' => $autocomplete_endpoint->provide_default_uri,
+      '#title' => $this->t('Provide a default URI.'),
+      '#attributes' => [
+        'name' => 'provide_default_uri',
+      ],
+    ];
+    $form['default_uri_prefix'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Default URI prefix'),
+      '#description' => $this->t('Prefix to use in default URIs. Should begin with "http://" and end with "/".'),
+      '#maxlength' => 255,
+      '#default_value' => $autocomplete_endpoint->default_uri_prefix,
+      '#states' => [
+        'visible' => [
+          ':input[name="provide_default_uri"]' => ['checked' => TRUE],
+        ],
+      ],
     ];
 
     return $form;
@@ -186,7 +207,11 @@ class AutocompleteEndpointFormBase extends EntityForm {
         $form_state->setErrorByName('content_type', t('Node endpoints require a content type.'));
       }
     }
-
+    if ($form_state->getValue('provide_default_uri') === 1) {
+      if (empty($form_state->getValue('default_uri_prefix'))) {
+        $form_state->setErrorByName('default_uri_prefix', t('You must provide a default URI prefix.'));
+      }
+    }
   }
 
   /**

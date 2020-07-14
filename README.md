@@ -50,6 +50,8 @@ The configuration form asks for the "machine name" of various things. This is ob
 * Node content type: when you are viewing the list of fields in a content type, e.g., `/admin/structure/types/manage/islandora_object/fields`, the content type's machine name is the string that comes before "fields", in this example "islandora_object".
 * URI field: for both vocabularies and content types, when you are viewing the "Manage Fields" tab, the machine name of the field you have configured to store Linked Data URIs.
 
+If you want the Autocomplete Endpoint module to generate Linked Data URIs for items, check the "Provide a default URI" box and a prefix. 
+
 ## Usage
 
 ### On the Drupal instance exposing the data (the "provider")

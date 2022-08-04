@@ -39,6 +39,11 @@ class Vocabulary implements AutocompleteEndpointDataSourceInterface {
           if (array_key_exists('uri', $uri[0]) && !is_null($uri[0]['uri'])) {
             $results[] = ['label' => $term->name, 'uri' => $uri[0]['uri']];
           }
+          else if (array_key_exists('value', $uri[0]) && !is_null($uri[0]['value'])) {
+
+            $results[] = ['label' => $term->name, 'uri' => $uri[0]['value']];
+          }
+
         }
       }
     }

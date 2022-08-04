@@ -38,7 +38,7 @@ This module is Drupal 9 ready.
 
 Before you create autocomplete endpoints, you will need to add a special field to the vocabulary or content type that you want to expose as linked data. This field is not really that special, but it must be present. You will need to identify this field when you create your endpoints as described below.
 
-This field will hold the Linked Data URI for each vocabulary term or node. When you create it, choose "Text (plain)". It doesn't matter what you name it.
+This field will hold the Linked Data URI for each vocabulary term or node. When you create it, choose "Text (plain)". It doesn't matter what you name it. The value of this field in each term/node must be created manually. It does not need to resolve.
 
 ### Creating the autocomplete endpoints
 
